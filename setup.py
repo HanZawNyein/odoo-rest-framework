@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="odoo_rest_framework",
-    version="1.0.5",
+    version="1.0.6",
     description="Store user access token for one-time-login",
     long_description=description,
     long_description_content_type="text/markdown",
@@ -13,6 +13,6 @@ setup(
     author="Han Zaw Nyein",
     author_email="hanzawnyineonline@gmail.com",
     zip_safe=False,
-    url='https://github.com/HanZawNyein/',
+    url='https://github.com/HanZawNyein/odoo-rest-framework.git',
     install_requires=['PyJWT', 'simplejson','requests','tzwhere']
 )

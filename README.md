@@ -1,6 +1,6 @@
 ### Odoo REST Framework
 
-    Version : 1.0.5
+    Version : 1.0.6
 
 ### Package :
 
@@ -70,7 +70,7 @@
                     "holding_id": {"id": 6, "name": "Bago"},
                     "qty": 8,
                     "way_plan_id": {"id": 1, "name": "Monthly Way Plan for February(Bago)"},
-                    "market_review_id": false
+                    "market_review_id": null
                 },
                 {
                     "id": 2,
@@ -82,8 +82,8 @@
                     "branch_id": {"id": 1, "name": "Test Brand"},
                     "holding_id": {"id": 6, "name": "Bago"},
                     "qty": 0,
-                    "way_plan_id": false,
-                    "market_review_id": false
+                    "way_plan_id": null,
+                    "market_review_id": null
                 }
             ],
             "date": "2022-09-02",
