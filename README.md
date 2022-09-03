@@ -17,3 +17,16 @@
 
 ### Description : 
     Store user access token for one-time-login
+
+### Example
+    from odoo_rest_framework import (
+        jwt_http,
+        validator,
+        util,
+        status,
+        fields_extractor,
+        format_dict_one2many,
+        format_dict_many2one,
+        serializer,
+        send_notifications
+    )
