@@ -1,5 +1,5 @@
 ### Odoo REST Framework
-    Version : 1.0.3
+    Version : 1.0.4
 
 ### Package : 
     pip install odoo_rest_framework
