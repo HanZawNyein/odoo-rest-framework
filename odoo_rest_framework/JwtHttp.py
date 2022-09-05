@@ -109,51 +109,6 @@ class JwtHttp:
         token = validator.create_token(user)
         return self.response(data={'user': user, 'token': token})
 
-    def get_leave_list(self, leave_type, report_id, related_hr_id):
-        http_method, body, headers, token = JwtHttp.parse_request()
-        result = validator.verify_token(token)
-        if not result['status']:
-            return JwtHttp.errcode(code=result['code'], message=result['message'])
-
-        # DOMAIN
-        domain = []
-        date = datetime.now().strftime('%Y-%m-%d')
-        fiscal_id = request.env['hr.fiscal.year'].sudo().search(
-            [('date_from', '<=', date), ('date_to', '>=', date), ('active', '=', True)])
-        if not fiscal_id:
-            date_from = date
-            date_to = date
-        else:
-            date_from = fiscal_id[0].date_from
-            date_to = fiscal_id[0].date_to
-
-        employee = request.env['hr.employee'].sudo().search([('user_id', '=', request.env.user.id)])
-
-        if leave_type == 'All' and report_id == 0 and related_hr_id == 0:
-            domain = [('request_date_to', '>=', date_from), ('request_date_to', '<=', date_to)]
-
-        elif leave_type != 'All' and report_id == 0 and related_hr_id == 0:
-            domain = [('request_date_to', '>=', date_from), ('request_date_to', '<=', date_to),
-                      ('holiday_status_id.name', '=', leave_type)]
-
-        elif leave_type == 'All' and report_id != 0 and related_hr_id == 0:
-            domain = [('request_date_to', '>=', date_from), ('request_date_to', '<=', date_to),
-                      ('report_id', '=', report_id)]
-
-        else:
-            domain = [('request_date_to', '>=', date_from), ('request_date_to', '<=', date_to),
-                      ('related_hr_id', '=', related_hr_id)]
-
-        fields = [
-            'department_id', 'holiday_type', 'holiday_status_id', 'employee_id', 'related_hr_id', 'report_id',
-            'charge_id',
-            'name', 'request_date_from', 'request_date_to', 'duration_display', 'state', 'payslip_status', 'attach'
-        ]
-        data = request.env['hr.leave'].sudo().search_read(domain, fields=fields)
-        for i in data:
-            i['request_date_from'] = str(i.get('request_date_from'))
-            i['request_date_to'] = str(i.get('request_date_to'))
-        return JwtHttp.response(data=data, message="Leave Details")
 
     def do_logout(self, token):
         request.session.logout()
