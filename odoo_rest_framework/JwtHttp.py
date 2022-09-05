@@ -12,7 +12,7 @@ return_fields = ['id', 'login', 'name', 'company_id', 'noti_token']
 
 class JwtHttp:
     def __init__(self):
-        self.tz_where = tzwhere.tzwhere()
+        self.tz = tzwhere.tzwhere()
 
     def get_state(self):
         return {
@@ -123,10 +123,10 @@ class JwtHttp:
         request.session.logout()
 
     def get_tz_where(self):
-        return self.tz_where
+        return self.tz
 
     def current_datetime_in_float(self, lat, lon):
-        timezone_str = self.tz_where.tzNameAt(float(lat), float(lon))
+        timezone_str = self.tz.tzNameAt(float(lat), float(lon))
         # current_time_in_float 
         tz = pytz.timezone(timezone_str)
         dt_with_tz = datetime.datetime.now(tz)
