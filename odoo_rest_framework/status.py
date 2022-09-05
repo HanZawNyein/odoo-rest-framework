@@ -10,9 +10,3 @@ UNNECESSARY_FIELDS = [
     'message_has_sms_error', 'display_name', 'message_main_attachment_id', 'create_uid', 'message_needaction',
     'message_has_error_counter', 'message_has_error', 'write_uid', 'website_message_ids', 'message_needaction_counter'
 ]
-
-ODOO_DEFAULT_FIELDS = [
-    fields.Char, fields.Text, fields.Selection,
-    fields.Boolean,
-    fields.Integer, fields.Float,
-]
