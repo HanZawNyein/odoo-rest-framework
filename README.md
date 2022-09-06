@@ -1,6 +1,6 @@
 ### Odoo REST Framework
 
-    Version : 1.0.9
+    Version : 1.1.0
 
 ### Package :
 
