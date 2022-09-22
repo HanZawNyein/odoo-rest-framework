@@ -1,0 +1,4 @@
+venv
+dist
+odoo_rest_framework.egg-info
+build
