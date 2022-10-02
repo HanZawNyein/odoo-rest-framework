@@ -4,7 +4,7 @@
 
 ### Package :
 
-    pip install odoo_rest_framework
+    pip install odoo-rest-framework
 
 ###### package link :
 
