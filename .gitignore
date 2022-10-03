@@ -1,3 +1,5 @@
 dist
 odoo_rest_framework.egg-info/
 venv/
+.idea
+.vscode
