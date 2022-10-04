@@ -5,17 +5,14 @@ from . import jwt_http, validator
 
 
 def dict_body_data(**kwargs):
-    if len(kwargs):
+    try:
+        raw_body_data = http.request.httprequest.data.decode('utf-8')
+        if raw_body_data:
+            kwargs.update(json.loads(raw_body_data.replace("'", '"')))
+    except Exception as e:
+        kwargs['message'] = str(e)
+    finally:
         return kwargs
-    else:
-        try:
-            raw_body_data = http.request.httprequest.data.decode('utf-8')
-            if raw_body_data:
-                kwargs = json.loads(raw_body_data.replace("'", '"'))
-        except Exception as e:
-            kwargs['message'] = str(e)
-        finally:
-            return kwargs
 
 
 def login_required(route=None, **kwargs):
@@ -27,7 +24,7 @@ def login_required(route=None, **kwargs):
             result = validator.verify_token(token)
             if not result['status']:
                 return jwt_http.errcode(code=result['code'], message=result['message'])
-            kw = dict_body_data(**kw)
+            kw.update(dict_body_data(**kw))
             if kw.get('message'):
                 return jwt_http.errcode(code=500, message=kw['message'])
             return view_func(self, **kw)
