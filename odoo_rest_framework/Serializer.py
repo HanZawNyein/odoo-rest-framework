@@ -54,9 +54,9 @@ def read_serializer(value_object):
         one_record = {}
         for v in list(value.keys()):
             if isinstance(value[v], datetime.date):
-                one_record[v] = datetime_toString(value[v]) or None
+                one_record[v] = odoo.fields.Date.to_string(value[v]) or None
             elif isinstance(value[v], datetime.datetime):
-                one_record[v] = odoo.fields.Datetime.to_string(value[v]) or None
+                one_record[v] = datetime_toString(value[v]) or None
             elif isinstance(value[v], tuple):
                 one_record[v] = {'id': value[v][0], 'name': value[v][1]} or None
             else:
@@ -66,4 +66,4 @@ def read_serializer(value_object):
 
 
 def datetime_toString(date_object):
-        return date_object.astimezone(pytz.timezone(request.env.user.tz or pytz.utc))
+    return date_object.astimezone(pytz.timezone(request.env.user.tz or pytz.utc))
