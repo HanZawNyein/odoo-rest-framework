@@ -1,6 +1,8 @@
 import datetime
 
 import odoo
+import pytz
+from odoo.http import request
 
 UNNECESSARY_FIELDS = [
     'activity_ids', 'activity_state', 'activity_user_id', 'activity_type_id', 'activity_type_icon',
@@ -64,4 +66,4 @@ def read_serializer(value_object):
 
 
 def datetime_toString(date_object):
-        return odoo.fields.Date.to_string(date_object).astimezone(pytz.timezone(request.env.user.tz or pytz.utc))
+        return date_object.astimezone(pytz.timezone(request.env.user.tz or pytz.utc))
