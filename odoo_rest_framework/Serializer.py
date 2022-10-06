@@ -3,6 +3,7 @@ import datetime
 import odoo
 import pytz
 from odoo.http import request
+from odoo import models
 
 UNNECESSARY_FIELDS = [
     'activity_ids', 'activity_state', 'activity_user_id', 'activity_type_id', 'activity_type_icon',
@@ -16,7 +17,7 @@ UNNECESSARY_FIELDS = [
 ]
 
 
-def fields_extractor(model_object: list, remove_fields=None):
+def fields_extractor(model_object: models.Model, remove_fields=None):
     if remove_fields is None:
         remove_fields = UNNECESSARY_FIELDS
     result = []
