@@ -13,7 +13,6 @@ def dict_body_data(**kwargs):
         kwargs['message'] = str(e)
     finally:
         for k in kwargs:
-            print(k)
             try:
                 kwargs[k] = int(kwargs[k])
             except:
