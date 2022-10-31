@@ -9,6 +9,8 @@ def dict_body_data(**kwargs):
         raw_body_data = http.request.httprequest.data.decode('utf-8')
         if raw_body_data:
             kwargs.update(json.loads(raw_body_data.replace("'", '"')))
+            for k in kwargs.keys():
+                kwargs[k] = int(kwargs[k]) or kwargs[k]
     except Exception as e:
         kwargs['message'] = str(e)
     finally:
@@ -24,6 +26,21 @@ def login_required(route=None, **kwargs):
             result = validator.verify_token(token)
             if not result['status']:
                 return jwt_http.errcode(code=result['code'], message=result['message'])
+            kw.update(dict_body_data(**kw))
+            if kw.get('message'):
+                return jwt_http.errcode(code=500, message=kw['message'])
+            return view_func(self, **kw)
+
+        return wrapper
+
+    return decorator
+
+
+def public_route(route=None, **kwargs):
+    def decorator(view_func):
+        @functools.wraps(view_func)
+        @http.route(route, **kwargs)
+        def wrapper(self, **kw):
             kw.update(dict_body_data(**kw))
             if kw.get('message'):
                 return jwt_http.errcode(code=500, message=kw['message'])

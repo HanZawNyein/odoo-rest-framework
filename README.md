@@ -1,10 +1,10 @@
 ### Odoo REST Framework
 
-    Version : 1.1.7
+    Version : 1.1.8
 
 ### Package :
 
-    pip install odoo-rest-framework
+    pip3 install odoo-rest-framework
 
 ###### package link :
 
