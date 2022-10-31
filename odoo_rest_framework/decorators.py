@@ -9,11 +9,15 @@ def dict_body_data(**kwargs):
         raw_body_data = http.request.httprequest.data.decode('utf-8')
         if raw_body_data:
             kwargs.update(json.loads(raw_body_data.replace("'", '"')))
-            for k in kwargs.keys():
-                kwargs[k] = int(kwargs[k]) or kwargs[k]
     except Exception as e:
         kwargs['message'] = str(e)
     finally:
+        for k in kwargs:
+            print(k)
+            try:
+                kwargs[k] = int(kwargs[k])
+            except:
+                pass
         return kwargs
 
 

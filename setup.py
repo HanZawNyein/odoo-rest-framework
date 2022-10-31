@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="odoo_rest_framework",
-    version="1.1.8",
+    version="1.1.9",
     description="Store user access token for one-time-login",
     long_description=description,
     long_description_content_type="text/markdown",
